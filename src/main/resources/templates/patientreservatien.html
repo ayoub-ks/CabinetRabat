@@ -51,11 +51,32 @@
 		<div class="jumbotron">
 			<div class="row">
 				<div class="col-md-6">
-				
-				
-				
-				
-				
+
+					<form action="/rechercherDay">
+						<input type="date" name="date"></input> 
+						<input type="submit" value="rechercher" />
+					</form>
+
+					<form>
+
+						<table >
+							<tr th:if="${day.getPeriods()==null}">
+								<td colspan="4">No Reservation Available</td>
+							</tr>
+							<tr th:each="period:${periods}">
+
+									<td th:text="${period.getTime()}"></td>
+
+									<td><a th:href="@{/reserver(id=${period.getPeriodID()})}">reserver</a></td>
+
+								</tr>
+                              
+							
+
+						</table>
+					</form>
+
+
 				</div>
 				<div class="col-md-1">
 					<div style="border-left: 1px solid #000; height: 500px"></div>

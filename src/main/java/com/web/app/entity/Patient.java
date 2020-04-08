@@ -1,9 +1,12 @@
 package com.web.app.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Patient {
@@ -18,6 +21,9 @@ public class Patient {
     private String passwordP;
     private String email_Patient	;
     private int age_Patient ;
+    
+    @OneToMany(mappedBy="patient")
+    private List<Appointment> appointments;
     
     
     
