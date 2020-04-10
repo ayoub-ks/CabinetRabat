@@ -46,9 +46,18 @@
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
 							href="/profilepatient"><i class="fas fa-user-alt"></i>Profile</a></li>
-						<li class="nav-item active"><a class="nav-link"
-							href="/patientreservation"><i class="fas fa-calendar-check"></i>
-								Reservation</a></li>
+						<li class="nav-item dropdown active"><a class="nav-link dropdown-toggle"
+							href="#" id="navbarDropdown" role="button" data-toggle="dropdown"><i class="fas fa-calendar-check"></i>Services</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						
+									<a class="dropdown-item active"
+										href="/patientreservation"><i
+											class="fas fa-calendar-check"></i>Reservation</a>
+											<div class="dropdown-divider"></div>
+									<a class="dropdown-item"
+										href="/patientreservationList"><i
+											class="fas fa-calendar-check"></i>ReservationListe</a>
+							</div>
 						<li class="nav-item"><a class="nav-link "
 							href="/patientlogout"><i class="fas fa-sign-out-alt"></i>Logout</a>
 						</li>
@@ -65,33 +74,62 @@
 		<div class="jumbotron">
 			<div class="row">
 				<div class="col-md-6">
-					<h3>Reservation Form</h3>
-					<hr>
 
+                   <h2>Reservation :</h2><br>
+                   <p class="lead">First step choose a day to check the available periods</p> 
+                   <h4>
+						<b>Date:</b>
+					</h4>
+					
+					
 					<form action="/rechercherDay">
-						<input type="date" name="date"></input> <input type="submit"
-							value="rechercher" />
+						<input type="date" name="date"></input> 
+						
+						<button type="submit" class="btn btn-light">Check</button>
 					</form>
+					
+                   <br><p class="lead">Second step choose the the period and the treatment you want to book a reservation </p> 
+                   <h4>
+						<b>Available Periods :</b>
+					</h4>
 
-					<form method="post" action="#" >
+
+					<form action="/reserver" method="post">
+
 						<table>
-							<tbody>
-								<tr th:if="${day.getPeriods()==null}">
-									<td colspan="4">No Reservation Available</td>
-								</tr>
-							
-								<tr th:each="period:${periods}">
-									<td th:text="${period.getTime()}"></td>
+							<tr th:if="${day.getPeriods()==null}">
+								<td colspan="4">choose a day first</td>
+							</tr>
+							<tr th:if="${#lists.size(periods)==0 && day.getDate()!=null}">
+								<td colspan="4">No Period is available for this day</td>
+							</tr>
+							<tr th:each="periodd:${periods}">
 
-									<td><a th:href="@{/reserver(id=${period.getPeriodID()})}">
-											reserver<i class="far fa-hand-point-up"></i>
-									</a></td>
-								</tr>
-							</tbody>
+								<td>
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="periodid"
+											id="exampleRadios1" th:value="${periodd.getPeriodID()}">
+										<label class="form-check-label" for="exampleRadios1"
+											th:text="${periodd.getTime()}"> Default radio </label>
+									</div>
+								
+							</tr>
+
 						</table>
+						<br>
+						<h4>
+							<b>Type of Treatment :</b>
+						</h4>
+						<select name="traitment" class="form-control" id="sel1">
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+						</select> 
+						<br>
+						
+						<button type="submit" class="btn btn-secondary">reserver</button>
 					</form>
-
-
 				</div>
 				<div class="col-md-1">
 					<div style="border-left: 1px solid #000; height: 500px"></div>
@@ -121,9 +159,7 @@
 					</h4>
 					<p>(+212)5.87.87.56.56</p>
 
-					<a class="btn btn-primary btn-lg" href="#" role="button">Learn
-						more</a>
-
+					
 				</div>
 			</div>
 		</div>

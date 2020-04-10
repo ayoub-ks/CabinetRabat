@@ -3,6 +3,7 @@
 
 html, body {
   	background: url(img4.jpg) no-repeat;
+  	background-attachment: fixed;
   	background-size: cover;
   	box-sizing: border-box;
 	height: 100%;
@@ -19,3 +20,10 @@ html, body {
     background: #c7ecee;
     border-radius: 8px;
   }
+
+.col-md-6{
+	text-align: center;
+}
+
+
+

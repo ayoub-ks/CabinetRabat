@@ -6,6 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+
+
+
 @Entity
 public class Period {
 	
@@ -17,8 +23,9 @@ public class Period {
 	
 	private boolean etat ;
 	
-	
-	private Integer dayID;
+	@ManyToOne
+	@JoinColumn(name="dayid")
+	private Day dayID;
 	
 	
 	
@@ -56,11 +63,11 @@ public class Period {
 		this.etat = etat;
 	}
 
-	public Integer getDayID() {
+	public Day getDayID() {
 		return dayID;
 	}
 
-	public void setDayID(Integer dayID) {
+	public void setDayID(Day dayID) {
 		this.dayID = dayID;
 	}
 
