@@ -92,31 +92,47 @@ public class PatientController {
 
 	@RequestMapping("/rechercherDay")
 	public String recherche(Model model, @RequestParam(value = "date") String date) {
-        
+ 
+		Day hh = new Day();
+		List<Period> newper = new ArrayList<Period>();
 		
-		Day hh = dayR.FindDayByDate(date);
-		List<Period> newper=new ArrayList<Period>();
-		
-		if (hh == null) {
-			
-			Day newDay = new Day();
-			
-			newDay.setDate(date);
-			
-			
-			
-			newDay.setPeriods(Arrays.asList(new Period("From 8:00 To 9:00"),new Period("From 9:00 To 10:00"),new Period("From 10:00 To 11:00"),new Period("From 11:00 To 12:00")));
-			dayR.saveDay(newDay);
-			hh=newDay;
-			newper=hh.getPeriods();
-		}else {
-		 	
-			newper=per.findFreePeriodInDay(hh);
-			
-		}
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate localDate = LocalDate.now();
+		String ddtf = dtf.format(localDate);
 
-		model.addAttribute("day", hh);
+		int comp = ddtf.compareTo(date);
+
+		if (comp <= 0) {
+
+			    hh = dayR.FindDayByDate(date);
+		      	
+
+		    	if (hh == null) {
+
+		   		    Day newDay = new Day();
+
+			     	newDay.setDate(date);
+
+			    	newDay.setPeriods(Arrays.asList(new Period("From 8:00 To 9:00"), new Period("From 9:00 To 10:00"),
+						new Period("From 10:00 To 11:00"), new Period("From 11:00 To 12:00")));
+		     		dayR.saveDay(newDay);
+		    		hh = newDay;
+			    	newper = hh.getPeriods();
+			    } 
+		       else {
+
+				newper = per.findFreePeriodInDay(hh);
+
+			      }
+
+	     
+		} 
+		
+		else {
+			hh.setDate(date);
+		}
 		model.addAttribute("periods", newper);
+		model.addAttribute("day", hh);
 
 		return "patientreservatien";
 	}
@@ -129,12 +145,11 @@ public class PatientController {
 	@PostMapping("/reserver")
     public String DEL(Model model,@ModelAttribute("patient") Patient patient,@RequestParam String traitment, @RequestParam Integer periodid ) {
 		
-		
 		Appointment newAPP=new Appointment();
+		Period period=per.findPeriodById(periodid);
 		
 		newAPP.setPatient(patient);
 		
-		Period period=per.findPeriodById(periodid);
 		period.setEtat(true);
 	
 		newAPP.setPeriod(period);
@@ -143,13 +158,9 @@ public class PatientController {
 		
 		appo.saveAppointment(newAPP);
 	
-		
-		
 	    model.addAttribute("appointment",newAPP);
 		return "reservSucces";
-			
-		
-		
+				
 	}
 	
 	@GetMapping("/patientreservationList")
@@ -184,7 +195,21 @@ public class PatientController {
 	
 	
 	
+	@RequestMapping("/DeletReservation")
+	public String DeletReservation(@RequestParam Integer id) {
+		
+		Appointment deleted=appo.findAppointmentById(id);
+		
+		Period period=deleted.getPeriod();
+		period.setEtat(false);
 	
+		appo.deleteDay(deleted);
+		
+		per.savePeriod(period);
+		
+		return "redirect:patientreservationList"; 
+		
+	}
 	
 	
 	@RequestMapping("/patientlogout")
