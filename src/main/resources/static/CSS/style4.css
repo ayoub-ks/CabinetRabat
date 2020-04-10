@@ -1,0 +1,60 @@
+@charset "ISO-8859-1";
+@import "https://use.fontawesome.com/releases/v5.5.0/css/all.css";
+
+html, body {
+  	background: url(img4.jpg) no-repeat;
+  	background-size: cover;
+  	box-sizing: border-box;
+	height: 100%;
+	width: 100%;
+	font-family: 'Poppins', sans-serif;
+	color: #222;
+	background-attachment: fixed;
+
+    align-items: center;
+  }
+  i{
+    padding-right: 10px;
+  }
+  .container{
+    background: #c7ecee;
+    border-radius: 8px;
+  }
+.m-tab{
+	background: #aaa69d;
+	border-radius: 10px;
+	text-align: center;
+}
+.col-md-8 h3{
+	color: #1e3799;
+	text-align: center;
+	padding: 8px;
+	border: none;
+	background: #dff9fb;
+	width: 50%;
+	text-align: center;
+	margin-left: 24%;
+	border-radius: 20px;
+	font-style: italic;
+}
+
+.btn1{
+	width:50%;
+	height: 30px;
+	border-radius: 30px;
+	background: #c7ecee;
+	color: #130f40;
+	text-align: center;
+	font-size: 17px;
+	border: none;
+	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.6);
+	position: relative;
+	overflow: none;
+	outline: none;
+}
+.btn1:hover{
+	background: #1e3799;
+	color: #fff;
+}
+
+

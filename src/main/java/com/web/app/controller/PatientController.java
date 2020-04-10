@@ -1,6 +1,7 @@
 package com.web.app.controller;
 
 import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.web.app.Repository.AppointmentDEO;
 import com.web.app.Repository.DayDEO;
 import com.web.app.Repository.PatientDEO;
 import com.web.app.Repository.PeriodDEO;
@@ -40,6 +42,9 @@ public class PatientController {
 	
 	@Autowired
 	PeriodDEO per;
+	
+	@Autowired
+	AppointmentDEO appd;
 	
 	@ModelAttribute("patient")
 	public Patient patient() {
@@ -131,12 +136,11 @@ public class PatientController {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
+	//Get a Profile page for patientS
+	@RequestMapping("/profilepatient")
+	public String profilepatient(Model model) {
+		return "patientprofile";
+	}
 	
 	@RequestMapping("/patientlogout")
 	public String patientlogout(SessionStatus status) {
@@ -145,5 +149,7 @@ public class PatientController {
 		return "redirect:home"; 
 		
 	}
+	
+
 
 }

@@ -19,19 +19,3 @@ html, body {
     background: #c7ecee;
     border-radius: 8px;
   }
-.col-md-6{
-	background: #81ecec;
-	border-radius: 10px;
-	text-align: center;
-}
-
-.tab{
-	border: 1px solid #636e72;
-	float: center;
-	border-radius: 10px;
-	text-align: center;
-}
-.tab table{
-	box-sizing: border-box;
-	padding: 10px;
-}
