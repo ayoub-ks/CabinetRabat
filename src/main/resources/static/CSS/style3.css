@@ -1,6 +1,7 @@
 @charset "ISO-8859-1";
+@import "https://use.fontawesome.com/releases/v5.5.0/css/all.css";
 
-html, body { 
+html, body {
   	background: url(img4.jpg) no-repeat;
   	background-attachment: fixed;
   	background-size: cover;
@@ -9,7 +10,27 @@ html, body {
 	width: 100%;
 	font-family: 'Poppins', sans-serif;
 	color: #222;
-	
+
     align-items: center;
   }
+  i{
+    padding-right: 10px;
+  }
+  .container{
+    background: #c7ecee;
+    border-radius: 8px;
+  }
+.col-md-6{
+	text-align: center;
+}
 
+.tab{
+	border: 1px solid #636e72;
+	float: center;
+	border-radius: 10px;
+	text-align: center;
+}
+.tab table{
+	box-sizing: border-box;
+	padding: 10px;
+}

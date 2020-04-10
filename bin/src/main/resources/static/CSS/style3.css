@@ -1,0 +1,14 @@
+@charset "ISO-8859-1";
+
+html, body { 
+  	background: url(img4.jpg) no-repeat;
+  	background-size: cover;
+  	box-sizing: border-box;
+	height: 100%;
+	width: 100%;
+	font-family: 'Poppins', sans-serif;
+	color: #222;
+	
+    align-items: center;
+  }
+
