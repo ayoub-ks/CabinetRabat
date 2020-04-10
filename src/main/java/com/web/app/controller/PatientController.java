@@ -200,10 +200,7 @@ public class PatientController {
 	}
 	
 	
-	
-<<<<<<< HEAD
 
-=======
 	@RequestMapping("/DeletReservation")
 	public String DeletReservation(@RequestParam Integer id) {
 		
@@ -220,7 +217,7 @@ public class PatientController {
 		
 	}
 	
->>>>>>> e1a742eb961186f982226a912e82c3ce5e3ab5ce
+
 	
 	@RequestMapping("/patientlogout")
 	public String patientlogout(SessionStatus status) {

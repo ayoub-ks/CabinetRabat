@@ -46,9 +46,16 @@
 						</a></li>
 						<li class="nav-item active"><a class="nav-link" href="#"><i
 								class="fas fa-user-alt"></i>Profile</a></li>
-						<li class="nav-item"><a class="nav-link"
-							href="/patientreservation"><i class="fas fa-calendar-check"></i>
-								Reservation</a></li>
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+							role="button" data-toggle="dropdown"><i class="fas fa-users-cog"></i>Services</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+								<a class="dropdown-item" href="/patientreservation"><i
+									class="fas fa-calendar-check"></i>Reservation</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="/patientreservationList"><i class="fas fa-list"></i>ReservationListe</a>
+							</div>
 						<li class="nav-item"><a class="nav-link "
 							href="/patientlogout"><i class="fas fa-sign-out-alt"></i>Logout</a>
 						</li>
@@ -64,7 +71,7 @@
 	<div class="container">
 		<div class="jumbotron">
 			<div class="row">
-			<div class="col-md-2"></div>
+				<div class="col-md-2"></div>
 				<div class="col-md-8">
 					<h3>Profile</h3>
 					<div class="m-tab">
@@ -96,9 +103,6 @@
 								</tr>
 							</tbody>
 						</table>
-						<form action="#">
-							<input class="btn1" type="submit" value="Edit">
-						</form>
 					</div>
 				</div>
 				<div class="col-md-2"></div>
