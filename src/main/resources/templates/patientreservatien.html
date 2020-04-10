@@ -97,9 +97,14 @@
 					<form action="/reserver" method="post">
 
 						<table>
-							<tr th:if="${day.getPeriods()==null}">
+							<tr th:if="${day.getPeriods()==null && day.getDate()==null }">
 								<td colspan="4">choose a day first</td>
 							</tr>
+							
+							<tr th:if="${day.getPeriods()==null && day.getDate()!=null }">
+								<td colspan="4">You can't book a reservation on a day already past</td>
+							</tr>
+							
 							<tr th:if="${#lists.size(periods)==0 && day.getDate()!=null}">
 								<td colspan="4">No Period is available for this day</td>
 							</tr>

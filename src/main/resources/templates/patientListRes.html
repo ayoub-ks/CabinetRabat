@@ -81,11 +81,12 @@
 						</thead>
 						<tbody>
 							<tr th:each="appointment:${Newappointments}">
-								<th scope="row">1</th>
+								<th scope="row"><span th:inline="text">[[${Newappointments.indexOf(appointment)+1}]]</span></th>
 								<td><span th:inline="text">[[${appointment.IdAppointment}]]</span></td>
 								<td><span th:inline="text">[[${appointment.period.dayID.date}]]</span></td>
 								<td><span th:inline="text">[[${appointment.period.time}]]</span></td>
 								<td><span th:inline="text">[[${appointment.traitment}]]</span></td>
+								<td><a th:href="@{/DeletReservation(id=${appointment.IdAppointment})}"><button type="button" class="btn btn-dark">Cancel Reservation</button></a> </td>
 							</tr>
 							
 						</tbody>
@@ -104,7 +105,7 @@
 						</thead>
 						<tbody>
 							<tr th:each="appointment:${Oldappointments}">
-								<th scope="row">1</th>
+								<th scope="row" > <span th:inline="text">[[${Oldappointments.indexOf(appointment)+1}]]</span></th>
 								<td><span th:inline="text">[[${appointment.IdAppointment}]]</span></td>
 								<td><span th:inline="text">[[${appointment.period.dayID.date}]]</span></td>
 								<td><span th:inline="text">[[${appointment.period.time}]]</span></td>
