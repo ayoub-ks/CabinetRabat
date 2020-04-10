@@ -1,5 +1,7 @@
 package com.web.app.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,13 +14,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.web.app.Repository.AppointmentDEO;
 import com.web.app.Repository.DayDEO;
 import com.web.app.Repository.PatientDEO;
 import com.web.app.Repository.PeriodDEO;
+import com.web.app.entity.Appointment;
 import com.web.app.entity.Day;
 import com.web.app.entity.Patient;
 import com.web.app.entity.Period;
@@ -40,6 +43,9 @@ public class PatientController {
 	
 	@Autowired
 	PeriodDEO per;
+	
+	@Autowired
+	AppointmentDEO appo;
 	
 	@ModelAttribute("patient")
 	public Patient patient() {
@@ -77,6 +83,8 @@ public class PatientController {
 	@GetMapping("/patientreservation")
 	public String patientreservation(Model model) {
 		Day day=new Day();
+		List<Period> newper=new ArrayList<Period>();
+		model.addAttribute("periods", newper);
 		model.addAttribute("day",day);
 		return "patientreservatien"; 
 		
@@ -103,7 +111,7 @@ public class PatientController {
 			newper=hh.getPeriods();
 		}else {
 		 	
-			newper=per.findFreePeriodInDay(hh.getDayID());
+			newper=per.findFreePeriodInDay(hh);
 			
 		}
 
@@ -117,21 +125,62 @@ public class PatientController {
 	
 
 	
-	@ResponseBody
-	@RequestMapping("/reserver")
-    public String DEL(Model model,@RequestParam Integer id) {
+	
+	@PostMapping("/reserver")
+    public String DEL(Model model,@ModelAttribute("patient") Patient patient,@RequestParam String traitment, @RequestParam Integer periodid ) {
 		
-		Period red=per.findPeriodById(id);
-		 red.setEtat(true);
-		 per.savePeriod(red) ;   
-		 
-		return "period reserved";
+		
+		Appointment newAPP=new Appointment();
+		
+		newAPP.setPatient(patient);
+		
+		Period period=per.findPeriodById(periodid);
+		period.setEtat(true);
+	
+		newAPP.setPeriod(period);
+		
+		newAPP.setTraitment(traitment);
+		
+		appo.saveAppointment(newAPP);
+	
+		
+		
+	    model.addAttribute("appointment",newAPP);
+		return "reservSucces";
 			
 		
 		
 	}
 	
-	
+	@GetMapping("/patientreservationList")
+	public String patientreservationList(Model model,@ModelAttribute("patient") Patient patient) {
+		
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate localDate = LocalDate.now();
+		String ddtf=dtf.format(localDate);
+		
+		List<Appointment> sched = appo.findAppointmentByPatient(patient);
+		List<Appointment> com=new ArrayList<Appointment>();
+		List<Appointment> old=new ArrayList<Appointment>();
+		
+		
+		for(Appointment appo : sched) {
+			 int comp=ddtf.compareTo(appo.getPeriod().getDayID().getDate());
+			if (comp<=0) {
+				com.add(appo);
+			}
+			else {
+				old.add(appo);
+			}	
+		}
+		
+		model.addAttribute("Newappointments", com);
+		model.addAttribute("Oldappointments", old);
+		
+
+		return "patientListRes"; 
+		
+	}
 	
 	
 	

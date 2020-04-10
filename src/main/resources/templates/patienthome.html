@@ -36,6 +36,7 @@
 								<span class="sr-only">(current)</span>
 						</a></li>
 						<li class="nav-item"><a class="nav-link" href="/patientreservation">Reservation</a></li>
+						<li class="nav-item"><a class="nav-link" href="/patientreservationList">ReservationL</a></li>
 						<li class="nav-item"><a class="nav-link " href="/patientlogout">Logout</a>
 						</li>
 					</ul>
@@ -57,7 +58,7 @@
       <img class="d-block w-100" src="CSS/img4.jpg" alt="First slide">
       <div class="carousel-caption">
       <h1 class="display-2">CABINET RABAT</h1>
-      <h3>Welcom <span th:inline="text">[[${patient.Name_Patient}]]</span>.<span th:inline="text">[[${patient.Lastname_Patient}]]</span></h3>
+      <h3>Welcom <span th:inline="text">[[${patient.Name_Patient}]]</span> <span th:inline="text">[[${patient.Lastname_Patient}]]</span></h3>
       <a href="/patientreservation"><button type="button" class="btn btn-primary btn-lg">Take reservation</button></a>
       </div>
     </div>

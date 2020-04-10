@@ -2,6 +2,7 @@
 
 html, body { 
   	background: url(img4.jpg) no-repeat;
+  	background-attachment: fixed;
   	background-size: cover;
   	box-sizing: border-box;
 	height: 100%;

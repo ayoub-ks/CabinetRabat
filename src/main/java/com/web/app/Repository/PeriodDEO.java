@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import com.web.app.entity.Day;
 import com.web.app.entity.Period;
 
 @Service
@@ -33,7 +33,7 @@ public class PeriodDEO {
 		periodRepository.delete(dnt);
 	}
 	
-	public List<Period> findFreePeriodInDay(Integer date){
+	public List<Period> findFreePeriodInDay(Day date){
 		return periodRepository.findFreePeriodInDay(date);
 	}
 }
