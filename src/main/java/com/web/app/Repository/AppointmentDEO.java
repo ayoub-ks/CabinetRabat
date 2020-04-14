@@ -40,5 +40,13 @@ public class AppointmentDEO {
 		return appointmentRepository.findAppointmentByPatient(patient);
 	}
 
+	public List<Appointment> findAppointmentByDate(String date){
+		return appointmentRepository.findAppointmentByDate(date);
+	}
 
+	
+	
+	public List<Appointment> findAppointmentByMonth(String date){
+		return appointmentRepository.findAppointmentByMonth(date);
+	}
 }

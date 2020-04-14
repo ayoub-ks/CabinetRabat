@@ -45,10 +45,10 @@
                                     <div class="col-md-12">
                                         
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="userP" placeholder="user name *" value=""  ></input>
+                                            <input type="text" class="form-control" name="userP" placeholder="user name *" value=""   ></input>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control" name="passwordP" placeholder="Password *" value=""   ></input>
+                                            <input type="password" class="form-control" name="passwordP" placeholder="Password *" value=""    ></input>
                                         </div>
                                         
                                        <input type="submit" class="btnRegister"  value="Register"/></input>
@@ -59,17 +59,19 @@
                             <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                 <h3  class="register-heading">Login as a Dentiste</h3>
                                 <div class="row register-form">
+                                  <form method="post" th:action="@{/loginDentiste}"  style="width:500px;margin:auto"  >
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="First Name *" value="" />
+                                            <input type="text" class="form-control" name="userD" placeholder="User Name *" value=""  />
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Last Name *" value="" />
+                                            <input type="password" class="form-control" name="passwordD"  placeholder="Password *" value=""  />
                                         </div>
                                         
                                        <input type="submit" class="btnRegister"  value="Register"/>
                                        
                                     </div>
+                                  </form>
                                 </div>
                             </div>
                         </div>

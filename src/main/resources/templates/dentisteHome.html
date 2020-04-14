@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+        
+      <link rel="stylesheet" href="CSS/style3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  </head>
+  <body>
+  <!-- NAVBARR -->
+   
+         <div class="header"> 
+         	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <div class="container">
+			
+				<a class="navbar-brand" href="#"><i class="fas fa-tooth"></i>Dental
+					Clinic Rabat</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item"><a class="nav-link" href="/patienthomee"><i
+								class="fas fa-home"></i>Home
+								<span class="sr-only">(current)</span>
+						</a></li>
+						<li class="nav-item"><a class="nav-link" href="/profilepatient"><i class="fas fa-user-alt"></i>Profile</a></li>
+						<li class="nav-item dropdown active"><a class="nav-link dropdown-toggle"
+							href="#" id="navbarDropdown" role="button" data-toggle="dropdown"><i class="fas fa-users-cog"></i>Services</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						
+									<a class="dropdown-item"
+										href="/patientreservation"><i
+											class="fas fa-calendar-check"></i>Reservation</a>
+											<div class="dropdown-divider"></div>
+									<a class="dropdown-item active"
+										href="/dentistelist"><i class="fas fa-list"></i>ReservationListe</a>
+							</div>
+						<li class="nav-item"><a class="nav-link " href="/patientlogout"><i class="fas fa-sign-out-alt"></i>Logout</a>
+						</li>
+					</ul>
+	              </div>
+				</div>
+			</nav>
+		
+         
+         </div>
+    <!--  Jumbotron  -->
+
+	<div class="container">
+		<div class="jumbotron" >
+		  <div class="doch" >
+			<h1 class="display-2">CABINET RABAT</h1><br>
+					<h2>Welcome Doctor</h2>
+			</div>		
+					<p>Number of Appointment for today is : <span th:inline="text">[[${appNb}]]</span></p>
+			 
+		</div>
+	</div>
+
+	<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
