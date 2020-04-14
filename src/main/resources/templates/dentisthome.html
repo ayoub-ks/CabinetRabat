@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="CSS/styleDH.css">
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+	<input type="checkbox" id="check" name="" value="">
+	<label for="check"><i class="fas fa-bars" id="btn"></i> <i
+		class="fas fa-times" id="cancel"></i></label>
+	<div class="sidebar">
+		<header>
+			Mr.<span th:inline="text">[[${dentist.lastname}]]</span>
+		</header>
+		<ul>
+			<li><a href="#"><i class="fas fa-qrcode"></i>Home</a></li>
+			<li><a href="/Appointements"><i class="fas fa-stream"></i>Appointments</a></li>
+			<li><a href="/AllPat"><i class="fas fa-users"></i>Patients</a></li>
+			<li><a href="#"><i class="fas fa-sliders-h"></i>Services</a></li>
+			<li><a href="#"><i class="fas fa-envelope"></i>Contact</a></li>
+			<li><a href="/dentistlogout"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+		</ul>
+	</div>
+	
+	<section>
+	</section>
+
+</body>
+</html>

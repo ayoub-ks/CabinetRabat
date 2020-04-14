@@ -27,6 +27,9 @@ public class AppointmentDEO {
 		return appointmentRepository.findAll() ;
 	}
 	
+
+	
+	
 	public Appointment findAppointmentById(Integer id ) {
 		return appointmentRepository.getOne(id);
 	}

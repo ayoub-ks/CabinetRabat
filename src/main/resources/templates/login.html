@@ -57,19 +57,21 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <h3  class="register-heading">Login as a Dentiste</h3>
+                                <h3  class="register-heading">Login as a Dentist</h3>
                                 <div class="row register-form">
+                                <form method="post" th:action="@{/loginDentist}"  style="width:500px;margin:auto"  >
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="First Name *" value="" />
+                                            <input type="text" class="form-control" name="email" placeholder="Enter Email *" value="" />
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Last Name *" value="" />
+                                            <input type="password" class="form-control" name="password" placeholder="Enter Password *" value="" />
                                         </div>
                                         
                                        <input type="submit" class="btnRegister"  value="Register"/>
                                        
                                     </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

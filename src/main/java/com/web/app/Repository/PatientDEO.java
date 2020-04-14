@@ -25,9 +25,9 @@ public class PatientDEO {
 		return patientRepository.getOne(id);
 	}
 	
-	public void deletePatient(Patient dnt ) {
+	public void deletePatient(Integer id ) {
 		
-		patientRepository.delete(dnt);
+		patientRepository.deleteById(id);
 	}
 	
 	public Patient loginPatient (String userP,String passwordP) {
