@@ -25,5 +25,23 @@ html, body {
 	text-align: center;
 }
 
-
+.doch {
+	text-align: center;
+	top:50%;
+	transform: translateY(-20%);
+}
+.doch h1{
+	font-size:500%;
+	text-transform:uppercase;
+	text-shadow: 1px 1px 15px #000;
+}
+.doch h2{
+	font-size:200%;
+	font-width:500;
+	text-shadow: 1px 1px 10px #000;
+	padding-bottom: 1rem;
+}
+h1{
+	text-align: center;
+}
 

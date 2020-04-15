@@ -16,5 +16,11 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Integer
 	public List<Appointment> findAppointmentByPatient(@Param("patient")Patient patient);
 	
 	
+	@Query("select a from Appointment a where a.period.dayID.date = :date ")
+	public List<Appointment> findAppointmentByDate(@Param("date")String date);
+	
+	
+	@Query("select a from Appointment a where a.period.dayID.date LIKE :date% ")
+	public List<Appointment> findAppointmentByMonth(@Param("date")String date);
 	
 }

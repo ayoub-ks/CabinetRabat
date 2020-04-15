@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Dentist {
+public class Dentiste {
 	@Id
 	@GeneratedValue
 	@Column(name="id_dentist")
@@ -51,14 +51,14 @@ public class Dentist {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Dentist(String firstname, String lastname, String email, String password) {
+	public Dentiste(String firstname, String lastname, String email, String password) {
 		super();
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
 		this.password = password;
 	}
-	public Dentist() {
+	public Dentiste() {
 		super();
 	}
 	

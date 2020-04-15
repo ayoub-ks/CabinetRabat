@@ -12,20 +12,23 @@
 		class="fas fa-times" id="cancel"></i></label>
 	<div class="sidebar">
 		<header>
-			Mr.<span th:inline="text">[[${dentist.lastname}]]</span>
+			Mr.<span th:inline="text">[[${Dentiste.lastname}]]</span>
 		</header>
 		<ul>
 			<li><a href="#"><i class="fas fa-qrcode"></i>Home</a></li>
-			<li><a href="/Appointements"><i class="fas fa-stream"></i>Appointments</a></li>
+			<li><a href="/AppList"><i class="fas fa-stream"></i>Appointments</a></li>
 			<li><a href="/AllPat"><i class="fas fa-users"></i>Patients</a></li>
 			<li><a href="#"><i class="fas fa-sliders-h"></i>Services</a></li>
 			<li><a href="#"><i class="fas fa-envelope"></i>Contact</a></li>
 			<li><a href="/dentistlogout"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
 		</ul>
+		<br>
+		<div class="nbr">
+			Number of Appointment for today is : <span th:inline="text">[[${appNb}]]</span>
+		</div>
 	</div>
-	
-	<section>
-	</section>
+	<section></section>
+
 
 </body>
 </html>
