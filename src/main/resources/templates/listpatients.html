@@ -42,7 +42,7 @@
 								<td><span th:inline="text">[[${LP.Id_Patient}]]</span></td>
 								<td><span th:inline="text">[[${LP.Name_Patient}]]</span></td>
 								<td><span th:inline="text">[[${LP.Lastname_Patient}]]</span></td>
-								<td><span th:inline="text">[[${LP.getUser_Patient()}]]</span></td>
+								<td><a th:href="@{/chekPatient(id=${LP.Id_Patient})}"><span th:inline="text">[[${LP.getUser_Patient()}]]</span></a></td>
 								<td><span th:inline="text">[[${LP.getEmail_Patient()}]]</span></td>
 								<td><span th:inline="text">[[${LP.getAge_Patient()}]]</span></td>
 								<td><a th:href="@{/DeletePatient(id=${LP.Id_Patient})}"><button type="button" class="btn btn-danger">DELETE</button></a> </td>

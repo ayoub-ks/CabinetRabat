@@ -59,7 +59,7 @@
 							<tr th:each="appointment:${appointments}">
 								<th scope="row"><span th:inline="text">[[${appointments.indexOf(appointment)+1}]]</span></th>
 								<td><span th:inline="text">[[${appointment.IdAppointment}]]</span></td>
-								<td><span th:inline="text">[[${appointment.patient.Name_Patient}]]</span> <span th:inline="text">[[${appointment.patient.Lastname_Patient}]]</span></td>
+								<td><a th:href="@{/chekPatient(id=${appointment.patient.Id_Patient})}"><span th:inline="text">[[${appointment.patient.Name_Patient}]]</span> <span th:inline="text">[[${appointment.patient.Lastname_Patient}]]</span></a></td>
 								<td><span th:inline="text">[[${appointment.period.dayID.date}]]</span></td>
 								<td><span th:inline="text">[[${appointment.period.time}]]</span></td>
 								<td><span th:inline="text">[[${appointment.traitment}]]</span></td>
@@ -70,7 +70,7 @@
 					</table>
 				</div>
 				<div class="col-md-1"><a th:href="@{/back}"><button type="button" class="btn btn-dark">Go Back</button></a></div>
-				<div class="col-md-1"></div>
+			
 			</div>
 		</div>
 	</div>

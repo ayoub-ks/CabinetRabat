@@ -46,12 +46,6 @@ public class DentisteController {
 	@Autowired
 	PatientDEO patientDEO;
 	
-	@ModelAttribute("patient")
-	public Patient patient() {
-		return new Patient();
-	}
-
-	
 	@ModelAttribute("Dentiste")
 	public Dentiste Dentiste() {
 		return new Dentiste();
@@ -68,7 +62,8 @@ public class DentisteController {
 			
 			
 			List<Appointment> sched=appo.findAppointmentByDate(ddtf);
-			model.addAttribute("appNb",sched.size());
+			int aa=sched.size();
+			model.addAttribute("appNb",aa);
 			model.addAttribute("Dentiste", dentistDEO.logindentist(email, password));
 			return "forward:/dentisthomee";
 		} else
@@ -85,10 +80,10 @@ public class DentisteController {
 	}
 	
 	//Page Patients list
-	@RequestMapping("/AllPat")
-	public String pageallpatients() {
-		return "listpatients";
-	}
+//	@RequestMapping("/AllPat")
+//	public String pageallpatients() {
+//		return "listpatients";
+//	}
 	
 	//Patients list
 	@RequestMapping(value="/AllPat", method=RequestMethod.GET)
@@ -105,7 +100,14 @@ public class DentisteController {
 		return "listpatients";
 	}
 	
+
+	//chek patient method 
+	@RequestMapping(value="/chekPatient", method=RequestMethod.GET)
+	public String chekpatient(Model model, @RequestParam Integer id) {
 	
+		model.addAttribute("patient", this.patientDEO.findPatientById(id));
+		return "patientProfilForDentiste";
+	}
 	
 	
 	//Logout from dentist page
