@@ -25,6 +25,9 @@ public class Patient {
     @OneToMany(mappedBy="patient")
     private List<Appointment> appointments;
     
+    @OneToMany(mappedBy="patient")
+	private List<Advice> advices;
+    
     
     
 	public Patient() {

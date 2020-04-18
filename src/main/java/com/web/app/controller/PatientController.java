@@ -14,14 +14,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.web.app.Repository.AdviceDEO;
+import com.web.app.Repository.AnswerDEO;
 import com.web.app.Repository.AppointmentDEO;
 import com.web.app.Repository.DayDEO;
 import com.web.app.Repository.PatientDEO;
 import com.web.app.Repository.PeriodDEO;
+import com.web.app.entity.Advice;
+import com.web.app.entity.Answer;
 import com.web.app.entity.Appointment;
 import com.web.app.entity.Day;
 import com.web.app.entity.Patient;
@@ -47,6 +52,13 @@ public class PatientController {
 	
 	@Autowired
 	AppointmentDEO appo;
+	
+	@Autowired
+	AdviceDEO adviceDEO;
+	
+	@Autowired
+	AnswerDEO answerDEO;
+	
 	
 	@ModelAttribute("patient")
 	public Patient patient() {
@@ -218,7 +230,7 @@ public class PatientController {
 	}
 	
 
-	
+	//logout patient
 	@RequestMapping("/patientlogout")
 	public String patientlogout(SessionStatus status) {
 		
@@ -227,6 +239,71 @@ public class PatientController {
 		
 	}
 	
+	//Advice page for patient
+	@RequestMapping("/advicepage")
+	public String advicepage(Model model,@ModelAttribute("patient") Patient patient) {
+		model.addAttribute("AllAdv", this.adviceDEO.findAdviceByPatient(patient));
+		return "patientadvices";
+	}
+	
+	//Save an advice
+	@RequestMapping(value="/sendadvice",method=RequestMethod.POST)
+	public String sendadv(Model model,Advice adv,@ModelAttribute("patient") Patient patient ) {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate localDate = LocalDate.now();
+		String ddtf=dtf.format(localDate);
+		adv.setAdvD(ddtf);
+		
+		model.addAttribute("sendadv", this.adviceDEO.saveAdvice(adv));
+		model.addAttribute("AllAdv", this.adviceDEO.findAdviceByPatient(patient));
+		return "patientadvices";
+	}
+	
+	//delete an advice
+	@RequestMapping(value="/deleteAdv",method=RequestMethod.GET)
+	public String deleteadv(Model model,@RequestParam Integer id,@ModelAttribute("patient") Patient patient) {
+		this.adviceDEO.deleteAdvice(id);
+		model.addAttribute("AllAdv", this.adviceDEO.findAdviceByPatient(patient));
+		return "patientadvices";
+		
+	}
+	
+	
+	//go to answer list for patient
+	@RequestMapping(value="/pageanswer", method=RequestMethod.GET)
+	public String answerlist(Model model,@ModelAttribute("patient") Patient patient) {
+		List<Advice> adv=this.adviceDEO.findAdviceByPatient(patient);
+		List<Answer> ans=this.answerDEO.findAllAnswer();
+		List<Answer> ab= new ArrayList<Answer>();
+		for(Advice a:adv) {
+			for(Answer b:ans) {
+				if(a.getId_adv().equals(b.getAdvice().getId_adv())) {
+						ab.add(b);	
+				}
+			}
+		}
+		model.addAttribute("listanswer", ab);
+		return "patientansweradvices";
+	}
+	
+	//delete answer with its advice
+	@RequestMapping(value="/deleteanswer")
+	public String deleteans(Model model,@RequestParam Integer id,@ModelAttribute("patient") Patient patient) {
+		this.answerDEO.deleteAnswer(id);
+		
+		List<Advice> adv=this.adviceDEO.findAdviceByPatient(patient);
+		List<Answer> ans=this.answerDEO.findAllAnswer();
+		List<Answer> ab= new ArrayList<Answer>();
+		for(Advice a:adv) {
+			for(Answer b:ans) {
+				if(a.getId_adv().equals(b.getAdvice().getId_adv())) {
+						ab.add(b);	
+				}
+			}
+		}
+		model.addAttribute("listanswer", ab);
+		return "patientansweradvices";
+	}
 
 
 }

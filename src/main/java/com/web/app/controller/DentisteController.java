@@ -20,11 +20,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.web.app.Repository.AdviceDEO;
+import com.web.app.Repository.AnswerDEO;
 import com.web.app.Repository.AppointmentRepository;
 
 import com.web.app.Repository.DentisteDEO;
 import com.web.app.Repository.DentisteRepository;
 import com.web.app.Repository.PatientDEO;
+import com.web.app.entity.Advice;
+import com.web.app.entity.Answer;
 import com.web.app.entity.Appointment;
 import com.web.app.entity.Dentiste;
 import com.web.app.entity.Patient;
@@ -46,6 +50,12 @@ public class DentisteController {
 	@Autowired
 	PatientDEO patientDEO;
 	
+	@Autowired
+	AdviceDEO adviceDEO;
+	
+	@Autowired
+	AnswerDEO answerDEO;
+	
 	@ModelAttribute("patient")
 	public Patient patient() {
 		return new Patient();
@@ -55,6 +65,11 @@ public class DentisteController {
 	@ModelAttribute("Dentiste")
 	public Dentiste Dentiste() {
 		return new Dentiste();
+	}
+	
+	@ModelAttribute("advice")
+	public Advice advice() {
+		return new Advice();
 	}
 	
 	
@@ -218,4 +233,61 @@ public class DentisteController {
 		      }
 		}		
 	}
+	
+	//go back to homee
+		@RequestMapping("/back1")
+		public String Back1(Model model) {
+			model.addAttribute("listadvices", this.adviceDEO.findAllAdvices());
+			model.addAttribute("listanswer", this.answerDEO.findAllAnswer());
+			return "dentistadvices";
+		}
+	
+	//go to advice page for dentist user
+	@RequestMapping(value="/dentistadv")
+	public String advpage() {
+		return "dentistadvices";
+	}
+	
+	//show to dentist an advice list
+	@RequestMapping(value="/dentistadv", method=RequestMethod.GET)
+	public String listadvice(Model model) {
+		model.addAttribute("listadvices", this.adviceDEO.findAllAdvices());
+		model.addAttribute("listanswer", this.answerDEO.findAllAnswer());
+		return "dentistadvices";
+	}
+	
+	//go to next page to response
+	@RequestMapping(value="/answeradv")
+	public String advanswerpage(Model model,@RequestParam Integer id) {
+		model.addAttribute("advice", this.adviceDEO.findAdviceById(id));
+		return "dentistansweradvices";
+	}
+	
+	//update advice, add answer to it
+	@RequestMapping(value="/updateadv",method=RequestMethod.POST)
+	public String sendresponsetopatient(Model model,Answer ans) {
+		model.addAttribute("advice");
+		this.answerDEO.saveAnswer(ans);
+		model.addAttribute("listanswer", this.answerDEO.findAllAnswer());
+		return "dentistansweradvices";
+	}
+	
+	//delete an advice
+		@RequestMapping(value="/deleteAdvd",method=RequestMethod.GET)
+		public String deleteadv(Model model,@RequestParam Integer id,@ModelAttribute("patient") Patient patient) {
+			this.adviceDEO.deleteAdvice(id);
+			model.addAttribute("listadvices", this.adviceDEO.findAllAdvices());
+			return "dentistadvices";
+			
+		}
+		//delete an answer
+		@RequestMapping(value="/deleteAnswer",method=RequestMethod.GET)
+		public String deleteans(Model model,@RequestParam Integer id,@ModelAttribute("patient") Patient patient) {
+			this.answerDEO.deleteAnswer(id);
+			model.addAttribute("listadvices", this.adviceDEO.findAllAdvices());
+			model.addAttribute("listanswer", this.answerDEO.findAllAnswer());
+			return "dentistadvices";
+			
+		}
+	
 }
