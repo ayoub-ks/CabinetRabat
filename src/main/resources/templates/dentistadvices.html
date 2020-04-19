@@ -23,32 +23,58 @@
 			<div class="row">
 				<div class="col-md-1"></div>
 				<div class="col-md-10">
-					<h1 class="display-4">Patients List:</h1><hr><br>
-					
-					<table class="table table-striped table-dark" id="mydatatable">
-						<thead class="thead-dark" >
+					<h3 align="center">Request Advice:</h3>
+					<hr>
+					<table class="table table-striped" id="mydatatable">
+						<thead class="thead-dark">
 							<tr>
-							    <th scope="col">id-patient</th>
-								<th scope="col">First Name</th>
-								<th scope="col">Last Name</th>
-								<th scope="col">User Name</th>
-								<th scope="col">Email</th>
-							    <th scope="col">Age</th>
+							    <th scope="col">Num</th>
+								<th scope="col">patient name</th>
+								<th scope="col">id_patient</th>
+								<th scope="col">Advice</th>
+								<th scope="col">Advice date</th>
+							    <th scope="col">Answer</th>
 							    <th scope="col">Option</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="LP:${listpatients}">
-								<td><span th:inline="text">[[${LP.Id_Patient}]]</span></td>
-								<td><span th:inline="text">[[${LP.Name_Patient}]]</span></td>
-								<td><span th:inline="text">[[${LP.Lastname_Patient}]]</span></td>
-								<td><a th:href="@{/chekPatient(id=${LP.Id_Patient})}"><span th:inline="text">[[${LP.getUser_Patient()}]]</span></a></td>
-								<td><span th:inline="text">[[${LP.getEmail_Patient()}]]</span></td>
-								<td><span th:inline="text">[[${LP.getAge_Patient()}]]</span></td>
-								<td><a th:href="@{/DeletePatient(id=${LP.Id_Patient})}"><button type="button" class="btn btn-danger">DELETE</button></a></td>
+							<tr th:each="Lv:${listadvices}">
+								<td><span th:inline="text">[[${listadvices.indexOf(Lv)+1}]]</span></td>
+								<td><span th:inline="text">[[${Lv.patient.getName_Patient()}]] [[${Lv.patient.getLastname_Patient()}]] </span></td>
+								<td><span th:inline="text">[[${Lv.patient.getId_Patient()}]]</span></td>
+								<td><span th:inline="text">[[${Lv.adv}]]</span></td>
+								<td><span th:inline="text">[[${Lv.advD}]]</span></td>
+								<td><a th:href="@{/answeradv(id=${Lv.id_adv})}"><button type="button" class="btn btn-success">Send</button></a></td>
+								<td><a th:href="@{/deleteAdvd(id=${Lv.id_adv})}"><button type="button" class="btn btn-danger">DELETE</button></a></td>
 							</tr>
 						</tbody>
-					</table><br>
+					</table>
+					<br>
+					<hr>
+					<h3 align="center">Response Advice:</h3>
+					<hr>
+						<table class="table table-hover" id="mydatatable1">
+						<thead class="thead-dark">
+							<tr>
+							    <th scope="col">id-patient</th>
+								<th scope="col">patient name</th>
+								<th scope="col">id-advice</th>
+								<th scope="col">Advice</th>
+							    <th scope="col">Answer</th>
+							    <th scope="col">Option</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="Lns:${listanswer}">
+								<td><span th:inline="text">[[${Lns.getAdvice().patient.getId_Patient()}]]</span></td>
+								<td><span th:inline="text">[[${Lns.advice.patient.getName_Patient()}]] [[${Lns.advice.patient.getLastname_Patient()}]] </span></td>
+								<td><span th:inline="text">[[${Lns.advice.getId_adv()}]]</span></td>
+								<td><span th:inline="text">[[${Lns.advice.adv}]]</span></td>
+								<td><span th:inline="text">[[${Lns.ans}]]</span></td>
+								<td><a th:href="@{/deleteAnswer(id=${Lns.id_answer})}"><button type="button" class="btn btn-danger">DELETE</button></a></td>
+							</tr>
+						</tbody>
+					</table>
 					
 				</div>
 				<div class="col-md-1"><a th:href="@{/back}"><button type="button" class="btn btn-dark">Go Back</button></a></div>
@@ -67,6 +93,9 @@
      $(document).ready(function() {
         $('#mydatatable').DataTable();
       } );
+     $(document).ready(function() {
+         $('#mydatatable1').DataTable();
+       } );
     
     </script>
   </body>
